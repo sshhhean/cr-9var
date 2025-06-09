@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class EveryThirdPlayerGame {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner;
+
+        System.out.print("Введите количество игроков: ");
+        int n = scanner.nextInt();
+
+        System.out.print("Введите стартовый номер игрока: ");
+        int start = scanner.nextInt();
+
+        if (n <= 0  start < 1  start > n) {
+            System.out.println("Некорректный ввод.");
+            return;
+        }
+
+        LinkedList<Integer> players = new LinkedList<>();
+        for (int i = 1; i <= n; i++) {
+            players.add(i);
+        }
+
+        while (players.getFirst() != start) {
+            int temp = players.removeFirst();
+            players.addLast(temp);
+        }
+
+        List<Integer> eliminated = new ArrayList<>();
+
+        while (!players.isEmpty()) {
+            for (int i = 1; i < 3; i++) {
+                int temp = players.removeFirst();
+                players.addLast(temp);
+            }
+            int removed = players.removeFirst();
+            eliminated.add(removed);
+        }
+
+        System.out.println("Порядок выбывших игроков:");
+        System.out.println(eliminated);
+    }
+}
