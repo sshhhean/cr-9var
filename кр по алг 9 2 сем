@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class SplitArrayAtMax {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите длину массива: ");
+        int n = scanner.nextInt();
+
+        int[] array = new int[n];
+        System.out.println("Введите элементы массива:");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        int maxIndex = 0;
+        int maxValue = array[0];
+
+        for (int i = 1; i < n; i++) {
+            if (array[i] > maxValue) {
+                maxValue = array[i];
+                maxIndex = i;
+            }
+        }
+
+        int[] leftArray = new int[maxIndex];
+        for (int i = 0; i < maxIndex; i++) {
+            leftArray[i] = array[i];
+        }
+
+        int[] rightArray = new int[n - maxIndex - 1];
+        for (int i = 0; i < rightArray.length; i++) {
+            rightArray[i] = array[maxIndex + 1 + i];
+        }
+
+        System.out.println("Максимальный элемент: " + maxValue);
+        System.out.println("Индекс максимального элемента: " + maxIndex);
+
+        System.out.print("Числа слева от максимума: ");
+        printArray(leftArray);
+
+        System.out.print("Числа справа от максимума: ");
+        printArray(rightArray);
+    }
+
+    private static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i < arr.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+    }
+}
